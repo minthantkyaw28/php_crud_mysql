@@ -1,0 +1,40 @@
+This is CRUD app with PHP and MYSQL DB
+
+Different php files for Create and Update.
+Read and Delete will be in index.php fils.
+
+
+Error 1 : Apostrophe(single quotes) Issue in Inserting data In Mysql ?
+
+mysql_real_escape_string() can be used to by pass this error but it is depricated method.
+
+The reason mysql forbit the Apostrophe from entering raw into data insert it to defend SQL Injection Attack.
+See -> https://chartio.com/learn/sql-tips/single-double-quote-and-backticks-in-mysql-queries/#:~:text=For%20example%3A%20a%20string%20containing%20this%20%27%20will,select%20columns%20and%20tables%20from%20your%20MySQL%20source.
+See -> https://dev.mysql.com/doc/refman/8.0/en/string-literals.html#:~:text=When%20writing%20application%20programs%2C%20any%20string%20that%20might,a%20function%20that%20escapes%20the%20special%20%20characters.
+See -> https://xaviesteve.com/1223/issues-with-accents-and-strange-characters-in-php-mysql-solved/
+
+This problem can be solved using addslashes() or addcslashes() functions.
+
+Since the input string can containe many special characters, MySQL will assume them as threat and show error.
+To get around this error, I use addslashes() function. That function put backslashes behind every predefined 
+characters such as single quote ('), double quote ("), backslash (\), and NULL.
+
+We can also use addcslashes() function instead of addslashes(), 
+if we wish to custom specify which we want to add backslash after them.
+
+See -> https://www.w3schools.com/php/php_ref_string.asp
+See -> https://www.w3schools.com/php/func_string_addslashes.asp
+See -> https://www.w3schools.com/php/func_string_addcslashes.asp
+
+There is another possibility. 
+I created the database with utf8mb4_unicode_ci 
+instead of utf8mb4_general_ci.
+
+I have to check when I create a database with utf8mb4_general_ci.
+We will see if there will be an error or not in CRUD process concerning with special characters input.
+
+Knowledge Gained(Error 1) : 
+
+Two string methods
+behavior of MySQL upon special characters in string data
+Many ways to make query string but this one is simplest "INSERT INTO tablename (column1,column2) VALUES ('value1','value2')"
